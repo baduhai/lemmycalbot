@@ -3,10 +3,23 @@
 A Lemmy bot that creates posts based on calendar events. It reads from a remote calendar, and creates posts in the specified community when every event starts. It gets the title 
 and body for the post from the calendar events' title and description respectively.
 
+### Installation
+
+If you have nix, I provide a package: `nix run github:baduhai/lemmycalbot#lemmycalbot`. You can also use this repo as a flake input and install the package to your system.
+
+If you don't have nix (assuming you have python installed):
+
+1. Clone this repo
+2. `pip install -r requirements.txt`
+3. `chmod +x lemmycalbot.py`
+
+This bot has been tested with Python 3.9. I personally run this bot with a systemd service, passing the PASSWORD environment variable using [LoadCredentialEncrypted=](https://systemd.io/CREDENTIALS/),
+but I leave the decision of how to deamonise the bot up to the administrator.
+
 ### Usage
 
 ```console
-usage: LemmyCalBot [-h] [-c CALENDAR] [-i INSTANCE] [-u USERNAME] [-p PASSWORD] [-! COMMUNITY]
+usage: lemmycalbot [-h] [-c CALENDAR] [-i INSTANCE] [-u USERNAME] [-p PASSWORD] [-! COMMUNITY]
 
 Calendar based, post-scheduling, Lemmy bot.
 
@@ -33,3 +46,8 @@ branch for an explanation and some modifications I've made to the bot to better 
 ### Roadmap
 
 - [ ] Add option to pin posts for the duration of the event
+- [ ] Add matrix/telegram/email/etc notifications for posts and program failures
+
+### Development
+
+If you have nix, it's as easy as cloning this repo, and running `nix develop`, dependencies are bundled in the devShell. If you don't want to use nix, requirements.txt shows the python libraries used.
