@@ -86,11 +86,11 @@ def scheduleEvent(calendar, scheduler):
         s.enterabs(timestamp, 1, createSessionThread, (title, body))
     else:
         exit("No upcoming events found in the calendar.")
-        
+
 
 # Run main logic in while True loop to repeat program for as long as there are calendar events.
 while True:
     cal = fetchAndParseCalendar(CALE)
     scheduleEvent(cal, s)
     s.run()
-    print("Post scheduled post test")
+    
