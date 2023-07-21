@@ -36,8 +36,8 @@ optional arguments:
   -! COMMUNITY, --community COMMUNITY
                         Community name, e.g. indycar
 
-Instead of arguments, environment variables may also be used, set CALENDAR, INSTANCE, USERNAME, PASSWORD and
-COMMUNITY. Environment variables take precedence over arguments.
+Instead of arguments, environment variables may also be used, set CALENDAR, INSTANCE, USERNAME,
+PASSWORD and COMMUNITY. Environment variables take precedence over arguments.
 ```
 
 If you want an example of this bot in action, look at [!indycar@sopuli.xyz](https://sopuli.xyz/c/indycar) during race weekends! And check out the [indycar](https://github.com/baduhai/lemmycalbot/tree/indycar) 
