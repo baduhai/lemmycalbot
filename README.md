@@ -29,3 +29,7 @@ COMMUNITY. Environment variables take precedence over arguments.
 
 If you want an example of this bot in action, look at [!indycar@sopuli.xyz](https://sopuli.xyz/c/indycar) during race weekends! And check out the [indycar](https://github.com/baduhai/lemmycalbot/tree/indycar) 
 branch for an explanation and some modifications I've made to the bot to better suit the community's needs.
+
+### Roadmap
+
+- [ ] Add option to pin and unpin threads for the duration of the event
