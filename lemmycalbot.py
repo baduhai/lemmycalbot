@@ -19,8 +19,8 @@ s = sched.scheduler(time.time, time.sleep)
 parser = argparse.ArgumentParser(
     prog = 'LemmyCalBot',
     description = 'Calendar based, post-scheduling, Lemmy bot.',
-    epilog = "Instead of arguments, environment variables may also be used, set CALENDAR, INTANCE, USERNAME, PASSWORD and COMMUNITY. Environment variables take precedence over arguments.")
-parser.add_argument('-c', '--calendar', nargs = 1, help = 'Calendar address, make sure to replace webcal:// with https:// or https://')
+    epilog = "Instead of arguments, environment variables may also be used, set CALENDAR, INSTANCE, USERNAME, PASSWORD and COMMUNITY. Environment variables take precedence over arguments.")
+parser.add_argument('-c', '--calendar', nargs = 1, help = 'Calendar address, make sure to replace webcal:// with https:// or http://')
 parser.add_argument('-i', '--instance', nargs = 1, help = 'Instance address, e.g. https://sopuli.xyz')
 parser.add_argument('-u', '--username', nargs = 1, help = 'Bot account username')
 parser.add_argument('-p', '--password', nargs = 1, help = 'Bot account password')
