@@ -1,7 +1,7 @@
 ## LemmyCalBot
 
-A Lemmy bot that creates threads based on calendar events. It reads from a remote calendar, and creates threads in the specified community when every event starts. It gets the title 
-and body for the thread from the calendar events' title and description respectively.
+A Lemmy bot that creates posts based on calendar events. It reads from a remote calendar, and creates posts in the specified community when every event starts. It gets the title 
+and body for the post from the calendar events' title and description respectively.
 
 ### Usage
 
@@ -32,4 +32,4 @@ branch for an explanation and some modifications I've made to the bot to better 
 
 ### Roadmap
 
-- [ ] Add option to pin and unpin threads for the duration of the event
+- [ ] Add option to pin posts for the duration of the event
