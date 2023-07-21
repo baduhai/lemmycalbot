@@ -17,7 +17,7 @@ COMM = os.getenv('COMMUNITY')
 
 s = sched.scheduler(time.time, time.sleep)
 parser = argparse.ArgumentParser(
-    prog = 'LemmyCalBot',
+    prog = 'lemmycalbot',
     description = 'Calendar based, post-scheduling, Lemmy bot.',
     epilog = "Instead of arguments, environment variables may also be used, set CALENDAR, INSTANCE, USERNAME, PASSWORD and COMMUNITY. Environment variables take precedence over arguments.")
 parser.add_argument('-c', '--calendar', nargs = 1, help = 'Calendar address, make sure to replace webcal:// with https:// or http://')
