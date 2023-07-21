@@ -1,5 +1,5 @@
 {
-  description = "Flake template for a python project";
+  description = "Calendar based lemmy bot";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
