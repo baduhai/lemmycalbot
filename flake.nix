@@ -22,6 +22,7 @@
           ps.pytz
           ps.requests
           ps.six
+          ps.tzlocal
           ps.urllib3
         ]);
       in with pkgs; {
