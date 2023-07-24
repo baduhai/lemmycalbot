@@ -6,10 +6,10 @@
 self: super: {
   "certifi" = super.buildPythonPackage rec {
     pname = "certifi";
-    version = "2023.5.7";
+    version = "2023.7.22";
     src = fetchurl {
-      url = "https://files.pythonhosted.org/packages/9d/19/59961b522e6757f0c9097e4493fa906031b95b3ebe9360b2c3083561a6b4/certifi-2023.5.7-py3-none-any.whl";
-      sha256 = "05n7h0lz1vh69hqlqi0vkygm74fx539gw5l93z5fysbqbj7ykhn6";
+      url = "https://files.pythonhosted.org/packages/4c/dd/2234eab22353ffc7d94e8d13177aaa050113286e93e7b40eae01fbf7c3d9/certifi-2023.7.22-py3-none-any.whl";
+      sha256 = "1ffvkq408hzmycg7m4y5zrc81nvpicp4gbpnp0384zc575sh7mlj";
     };
     format = "wheel";
     doCheck = false;
@@ -81,10 +81,10 @@ self: super: {
   };
   "pythorhead" = super.buildPythonPackage rec {
     pname = "pythorhead";
-    version = "0.15.2";
+    version = "0.15.4";
     src = fetchurl {
-      url = "https://files.pythonhosted.org/packages/4b/f7/8fde8b1cb20a66717ce4abc992dc7a14b9d2c98c148363730f8a34e068d2/pythorhead-0.15.2-py3-none-any.whl";
-      sha256 = "03jwn4dry54vriak3rzn1djqdqrkbaxywrj7f69wg0nlx7qhbrjd";
+      url = "https://files.pythonhosted.org/packages/58/35/2a173506e1d5e611a24b58c8305fea6fa40eefe3624c3f980a05146d5bc1/pythorhead-0.15.4-py3-none-any.whl";
+      sha256 = "0z85gyxn26d26yvnw0q0x4j2p81smjivlcrxnj86ljqcqq0zjhkm";
     };
     format = "wheel";
     doCheck = false;
@@ -134,6 +134,20 @@ self: super: {
     src = fetchurl {
       url = "https://files.pythonhosted.org/packages/d9/5a/e7c31adbe875f2abbb91bd84cf2dc52d792b5a01506781dbcf25c91daf11/six-1.16.0-py2.py3-none-any.whl";
       sha256 = "0m02dsi8lvrjf4bi20ab6lm7rr6krz7pg6lzk3xjs2l9hqfjzfwa";
+    };
+    format = "wheel";
+    doCheck = false;
+    buildInputs = [];
+    checkInputs = [];
+    nativeBuildInputs = [];
+    propagatedBuildInputs = [];
+  };
+  "tzlocal" = super.buildPythonPackage rec {
+    pname = "tzlocal";
+    version = "5.0.1";
+    src = fetchurl {
+      url = "https://files.pythonhosted.org/packages/84/d2/730a87f0dbf184760394a85088d0d2366a5a8a32bc32ffd869a83f1de854/tzlocal-5.0.1-py3-none-any.whl";
+      sha256 = "0bwrpva3z6wkggg4g1155g9y7873dbkly4kxv7dz5aln08c6wngk";
     };
     format = "wheel";
     doCheck = false;

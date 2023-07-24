@@ -2,20 +2,16 @@
 
 import os
 import time
+import pytz
 import sched
 import requests
 import argparse
+from dateutil import parser
 from pythorhead import Lemmy
 from icalendar import Calendar
+from tzlocal import get_localzone
 from datetime import datetime, timezone
 
-CALE = os.getenv('CALENDAR')
-INST = os.getenv('INSTANCE')
-USER = os.getenv('USERNAME')
-PASS = os.getenv('PASSWORD')
-COMM = os.getenv('COMMUNITY')
-
-s = sched.scheduler(time.time, time.sleep)
 parser = argparse.ArgumentParser(
     prog = 'lemmycalbot',
     description = 'Calendar based, post-scheduling, Lemmy bot.',
@@ -27,6 +23,11 @@ parser.add_argument('-p', '--password', nargs = 1, help = 'Bot account password'
 parser.add_argument('-!', '--community', nargs = 1, help = 'Community name, e.g. indycar')
 args = parser.parse_args()
 
+CALE = os.getenv('CALENDAR')
+INST = os.getenv('INSTANCE')
+USER = os.getenv('USERNAME')
+PASS = os.getenv('PASSWORD')
+COMM = os.getenv('COMMUNITY')
 if CALE is None:
     CALE = args.calendar[0]
     if CALE is None:
@@ -48,16 +49,17 @@ if COMM is None:
     if COMM is None:
         exit("Community name not set")
 
-# Login to lemmy, and find community id
-def lemmyInit():
-    lemmy = Lemmy(INST)
-    lemmy.log_in(USER, PASS)
-    community_id = lemmy.discover_community(COMM)
+
+s = sched.scheduler(time.time, time.sleep)
 
 # Create post, still need to find out to pin post
 def createSessionThread(title, body=""):
+    lemmy = Lemmy(INST)
+    lemmy.log_in(USER, PASS)
+    community_id = lemmy.discover_community(COMM)
     url = title.lower().replace(" ", "_")
-    lemmy.post.create(community_id, title, url, body)
+    print("Posting ", title)
+    lemmy.post.create(community_id, title, body=body)
 
 # Fetch calendar, and parse into raw ical
 def fetchAndParseCalendar(url):
@@ -73,16 +75,26 @@ def fetchAndParseCalendar(url):
 
 # Find closest upcoming event and schedule a post
 def scheduleEvent(calendar, scheduler):
-    now = datetime.now(timezone.utc)  # Offset-aware datetime
-    upcoming_events = [(event.get('dtstart').dt.replace(tzinfo=timezone.utc), event) for event in calendar.walk('VEVENT') if event.get('dtstart').dt > now]
+    now = datetime.now(get_localzone())
+    upcoming_events = [
+        (event.get('dtstart').dt, event.get('dtstart').params.get('TZID'), event) for event in calendar.walk('VEVENT') if event.get('dtstart').dt > now
+    ]
     if upcoming_events:
         # Sort the events based on start time and get the closest upcoming event
-        next_event_time, next_event = min(upcoming_events, key=lambda x: x[0])
+        next_event_time, event_timezone, next_event = min(upcoming_events, key=lambda x: x[0])
         title = next_event.get('summary')
         body = next_event.get('description')
+        # Check if the event_timezone is None, if so, use the computer's local timezone
+        if event_timezone is None:
+            event_tz = get_localzone()
+        else:
+            event_tz = pytz.timezone(event_timezone)
+        # Convert the start time to the event's timezone
+        next_event_time = next_event_time.astimezone(event_tz)
         # Convert the start time to a timestamp for the scheduler
         timestamp = time.mktime(next_event_time.timetuple())
         # Schedule the function for the closest upcoming event
+        print("Next thread:", "\n", title, "\n", next_event_time, "\n", timestamp)
         s.enterabs(timestamp, 1, createSessionThread, (title, body))
     else:
         exit("No upcoming events found in the calendar.")
@@ -93,4 +105,4 @@ while True:
     cal = fetchAndParseCalendar(CALE)
     scheduleEvent(cal, s)
     s.run()
-    
+
